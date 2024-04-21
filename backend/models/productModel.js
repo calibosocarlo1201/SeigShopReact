@@ -11,11 +11,11 @@ const reviewSchema = mongoose.Schema({
         required: true,
     },
     rating: {
-        type: number,
+        type: Number,
         required: true,
     },
     comment:{ 
-        type: string,
+        type: String,
         required: true,
     }
 }, {
@@ -51,22 +51,22 @@ const productSchema = new mongoose.Schema({
     },
     reviews: [reviewSchema],
     rating: {
-        type: number,
+        type: Number,
         required: true,
         default: 0,
     },
     numReviews: {
-        type: number,
+        type: Number,
         required: true,
         default: 0,
     },
     numReviews: {
-        type: number,
+        type: Number,
         required: true,
         default: 0,
     },
     numReviews: {
-        type: number,
+        type: Number,
         required: true,
         default: 0,
     },
