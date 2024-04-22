@@ -1,0 +1,15 @@
+calibosocarlo1201
+cPP4JXhPAq231uXE
+pbvZVQV18VN39iqp
+
+
+mongodb+srv://calibosocarlo1201:pbvZVQV18VN39iqp@cluster0.uhbhhlt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+
+npm install mongodb
+
+
+POSTMAN ACCOUNT:
+calibosocarlo1201@gmail.com
+calibosocarlo1201
+09279942288

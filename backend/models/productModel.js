@@ -45,6 +45,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    countInStock: {
+        type: Number,
+        required: true,
+    },
     description: {
         type: String,
         required: true,
@@ -55,12 +59,12 @@ const productSchema = new mongoose.Schema({
         required: true,
         default: 0,
     },
-    numReviews: {
+    price: {
         type: Number,
         required: true,
         default: 0,
     },
-    numReviews: {
+    countInStock: {
         type: Number,
         required: true,
         default: 0,
