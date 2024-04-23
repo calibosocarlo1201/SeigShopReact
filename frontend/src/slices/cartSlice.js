@@ -1,10 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit'
+import { updateCart } from '../utils/cartUtils';
 
 const initialState = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : { cartItems:[] };
-
-const addDecimals = (num) => {
-    return Math.round(num * 100 / 100).toFixed(2);
-}
+//const initialState = { cartItems:[] }
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -19,29 +17,18 @@ const cartSlice = createSlice({
             }else{
                 state.cartItems = [...state.cartItems, item];
             }
-
-            // Cacl Items Price
-            state.itemPrice = addDecimals(state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0));
-
-            // Cacl Shipping Price
-            state.shippingPrice = addDecimals(state.itemPrice > 100 ? 0 : 10);
-
-            // Cacl Tax Price
-            state.taxPrice = addDecimals(Number(0.15 * state.itemPrice).toFixed(2));
-
-            // Cacl Total Price
-            state.totalPrice = (
-                Number(state.ietmPrice) +
-                Number(state.shippingPrice) +
-                Number(state.taxPrice)
-            ).toFixed(2);
-
-            localStorage.setItem("cart", JSON.stringify(state));
+            
+            updateCart(state)
+        },
+        removeFromCart: (state,action) => {
+            // YUNG IRERETURN NYAN IS YUNG MGA CART SA ITEMS NA YUNG ID IS NOT EQUAL TO ACTION PAYLOAD(WHICH IS YUNG ID NA IRERECEIVE)
+            state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
+            updateCart(state)
         }
     },
 });
 
-export const { addToCart } = cartSlice.actions
+export const { addToCart, removeFromCart } = cartSlice.actions
 
 export default cartSlice.reducer;
 
