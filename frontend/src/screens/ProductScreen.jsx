@@ -17,8 +17,9 @@ const ProductScreen = () => {
     const [qty, setQty] = useState(1)
 
     const {data: product, isLoading, error} = useGetProductDetailsQuery(productId);
-
+    console.log(product);
     const addToCartHandler = () => {
+      console.log(product);
       dispatch(addToCart({...product, qty}));
       navigate('/cart')
     }
