@@ -35,10 +35,10 @@ const CartScreen = () => {
                 ) : (
                     <ListGroup>
                         {cartItems.map((item) => (
-                            <ListGroup.Item>
+                            <ListGroup.Item key={item._id}>
                                 <Row>
                                     <Col md={2} >
-                                        <Image src={item.image} alt={item.name} fluid round />
+                                        <Image src={item.image} alt={item.name} fluid round="true" />
                                     </Col>
                                     <Col md={3} >
                                         <Link to={`/product/${item._id}`} style={{textDecoration: 'none'}}>{item.name}</Link>
