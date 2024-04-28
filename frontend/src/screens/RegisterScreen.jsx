@@ -52,7 +52,7 @@ const RegisterScreen = () => {
       <h1>Sign Up</h1>
       <Form onSubmit={submitHandler}>
 
-      <Form.Group controlId='name' className='my-3'>
+        <Form.Group controlId='name' className='my-3'>
             <Form.Label>Name</Form.Label>
             <Form.Control type='text' placeholder='Enter Name' value={name} onChange={(e) => setName(e.target.value)}></Form.Control>
         </Form.Group>

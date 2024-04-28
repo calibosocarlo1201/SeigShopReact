@@ -14,7 +14,7 @@ export const updateCart = (state) => {
 
     // Cacl Total Price
     state.totalPrice = (
-        Number(state.itemsPrice) +
+        Number(state.itemPrice) +
         Number(state.shippingPrice) +
         Number(state.taxPrice)
     ).toFixed(2);
