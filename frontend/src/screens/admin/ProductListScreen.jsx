@@ -1,9 +1,9 @@
 import React from 'react'
-import { useGetProductsQuery, useCreateProductMutation } from '../../slices/productsApiSlice'
+import { useGetProductsQuery, useCreateProductMutation, useDeleteProductMutation } from '../../slices/productsApiSlice'
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import { Button, Table, Row, Col } from 'react-bootstrap';
-import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
 import {toast} from 'react-toastify'
 
@@ -11,7 +11,8 @@ const ProductListScreen = () => {
 
     const {data: products, isLoading, error, refetch} = useGetProductsQuery();
 
-    const [createProduct, {isLoading: loadingCreateProduct, error: errCreateProduct}] = useCreateProductMutation();
+    const [createProduct, {isLoading: loadingCreateProduct}] = useCreateProductMutation();
+    const [deleteProduct, {isLoading: loadingDelete}] = useDeleteProductMutation()
 
     const handleCreateProduct = async () => { 
         try {
@@ -24,6 +25,19 @@ const ProductListScreen = () => {
         }
     }
 
+    const deleteProductHandler = async (prodId) => {
+
+        if(window.confirm('Are you sure you want to delete this Product?')){
+            try {
+                const { data } = await deleteProduct(prodId);
+                refetch();
+                toast.success(data.message);
+            } catch (error) {
+                toast.error(error)
+            }
+        }
+    }
+
     return (
         <>
             <Row>
@@ -33,6 +47,7 @@ const ProductListScreen = () => {
                 </Col>
             </Row>
             {loadingCreateProduct && <Loader />}
+            {loadingDelete && <Loader />}
             {isLoading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
                 <>
                     <Table striped hover responsive className='table-sm'>
@@ -59,7 +74,7 @@ const ProductListScreen = () => {
                                     <td>{product.brand}</td>
                                     <td>
                                         <LinkContainer to={`/admin/product/${product._id}/edit`} ><Button variant='light' className='btn-sm mx-2'><FaEdit /></Button></LinkContainer>
-                                        <Button variant='light' className='btn-sm'><FaTrash /></Button>
+                                        <Button variant='light' className='btn-sm' onClick={() => deleteProductHandler(product._id)}><FaTrash /></Button>
                                     </td>
                                 </tr>
                             ))
