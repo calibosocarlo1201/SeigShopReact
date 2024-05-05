@@ -43,7 +43,7 @@ const ProductEditScreen = () => {
         toast.error(result.error)
       }else{
         toast.success('Product Updated Successfully');
-        navigate('/admin/product-list')
+        navigate('/admin/product-list');
       }
     }
 
